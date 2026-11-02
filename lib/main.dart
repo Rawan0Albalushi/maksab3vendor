@@ -28,20 +28,21 @@ Future<void> main() async {
 
   if(GetPlatform.isWeb) {
     await Firebase.initializeApp(options: const FirebaseOptions(
-      apiKey: "AIzaSyD0Z911mOoWCVkeGdjhIKwWFPRgvd6ZyAw",
-      authDomain: "stackmart-500c7.firebaseapp.com",
-      projectId: "stackmart-500c7",
-      storageBucket: "stackmart-500c7.appspot.com",
-      messagingSenderId: "491987943015",
-      appId: "1:491987943015:web:d8bc7ab8dbc9991c8f1ec2",
+      apiKey: "AIzaSyBMEqWRV6IufIK8vGwa92gd7Ml9BQnbhPQ",
+      authDomain: "maksab-production-c93fb.firebaseapp.com",
+      projectId: "maksab-production-c93fb",
+      storageBucket: "maksab-production-c93fb.firebasestorage.app",
+      messagingSenderId: "1091888758486",
+      appId: "1:1091888758486:web:9284cba638c5a8c35b9377",
     ));
   } else if(GetPlatform.isAndroid) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: "AIzaSyCc3OCd5I2xSlnftZ4bFAbuCzMhgQHLivA",
-        appId: "1:491987943015:android:9795ba69e89c684b8f1ec2",
-        messagingSenderId: "491987943015",
-        projectId: "stackmart-500c7",
+        apiKey: "AIzaSyBMEqWRV6IufIK8vGwa92gd7Ml9BQnbhPQ",
+        appId: "1:1091888758486:android:a7eb0c31d166d04b5b9377",
+        messagingSenderId: "1091888758486",
+        projectId: "maksab-production-c93fb",
+        storageBucket: "maksab-production-c93fb.firebasestorage.app",
       ),
     );
   }else {

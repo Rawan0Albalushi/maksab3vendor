@@ -30,7 +30,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.sixamtech.sixam_mart_store_app"
+        applicationId = "om.thawani.stroe"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
         versionCode = flutter.versionCode
