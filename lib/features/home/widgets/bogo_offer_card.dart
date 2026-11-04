@@ -10,8 +10,8 @@ class _BogoOfferCard extends StatelessWidget {
     /// rounded container below is the only surface. Painting an opaque colour here
     /// left its square corners showing outside that radius — invisible in light
     /// mode, four black notches in dark mode where cardColor is pure black.
-    return SizedBox(
-      height: 80,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 80),
       child: CustomInkWellWidget(
         onTap: (){
           Get.toNamed(RouteHelper.getBogoOfferRoute());
@@ -32,9 +32,19 @@ class _BogoOfferCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('hurry_up_bogo_offer_is_live'.tr, style: robotoSemiBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
-                  const SizedBox(height: Dimensions.paddingSizeSmall),
-                  Text('buy_more_and_enjoy_exclusive_free_items'.tr, style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeSmall)),
+                  Text(
+                    'hurry_up_bogo_offer_is_live'.tr,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: robotoSemiBold.copyWith(fontSize: Dimensions.fontSizeLarge),
+                  ),
+                  const SizedBox(height: Dimensions.paddingSizeExtraSmall),
+                  Text(
+                    'buy_more_and_enjoy_exclusive_free_items'.tr,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeSmall),
+                  ),
                 ],
               ),
             ),

@@ -85,8 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> checkPermission() async {
-    var notificationStatus = await Permission.notification.status;
-    var batteryStatus = await Permission.ignoreBatteryOptimizations.status;
+    final notificationStatus = await Permission.notification.status;
+    // Battery optimization is Android-only. permission_handler_html throws
+    // UnimplementedError for it, which was crashing the web home screen.
+    final PermissionStatus? batteryStatus = GetPlatform.isAndroid
+        ? await Permission.ignoreBatteryOptimizations.status
+        : null;
+    final bool batteryDenied = batteryStatus?.isDenied ?? false;
 
     if(notificationStatus.isDenied || notificationStatus.isPermanentlyDenied) {
       setState(() {
@@ -96,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       await Get.find<AuthController>().setNotificationActive(!notificationStatus.isDenied);
 
-    } else if(batteryStatus.isDenied) {
+    } else if(batteryDenied) {
       setState(() {
         _isBatteryOptimizationGranted = false;
         _isNotificationPermissionGranted = true;
@@ -109,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Get.find<ProfileController>().setBackgroundNotificationActive(true);
     }
 
-    if(batteryStatus.isDenied) {
+    if(batteryDenied) {
       Get.find<ProfileController>().setBackgroundNotificationActive(false);
     }
   }
@@ -126,6 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void requestBatteryOptimization() async {
+    if(!GetPlatform.isAndroid) {
+      return;
+    }
     var status = await Permission.ignoreBatteryOptimizations.status;
 
     if (status.isGranted) {
